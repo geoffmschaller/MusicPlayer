@@ -2,7 +2,16 @@
 
 Just an demo React app. Plays some music off Chillhop.
 
-### Songs:
+---
+
+#### Screen Shots
+![Home Screen](./home_screen.jpg)
+
+![Menu Open](./menu_open.jpg)
+
+---
+
+#### Songs:
 * 'Beaver Creek' by Aso, Middle School, Aviino
 * 'Daylight' by Aiguille
 * 'Keep Going' by Swørn

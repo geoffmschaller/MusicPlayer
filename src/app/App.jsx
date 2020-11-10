@@ -13,6 +13,10 @@ const App = () => {
 	const [currentSongIndex, setCurrentSongIndex] = useState(0);
 	const [menuMode, setMenuMode] = useState(false);
 
+	const menuModeHandler = () => {
+		setMenuMode(!menuMode);
+	}
+
 	const changeSongHandler = (newSongIndex, incrementAmount) => {
 		if (newSongIndex != null) return setCurrentSongIndex(newSongIndex);
 		let adjustedSongIndex = currentSongIndex + incrementAmount;
@@ -21,8 +25,13 @@ const App = () => {
 		setCurrentSongIndex(adjustedSongIndex);
 	}
 
-	const menuModeHandler = () => {
-		setMenuMode(!menuMode);
+	const manageMouseTimer = (isMouseGone) => {
+		let timer;
+		if (isMouseGone && menuMode) {
+			timer = setTimeout(() => {menuModeHandler()}, 3000);
+		} else {
+			clearTimeout(timer);
+		}
 	}
 
 	return (
@@ -35,6 +44,7 @@ const App = () => {
 				currentSong={currentSongIndex}
 				changeSong={changeSongHandler}
 				menuMode={menuMode}
+				manageMouseTimer={manageMouseTimer}
 			/>
 			<SongInformation
 				currentSong={songList[currentSongIndex]}
