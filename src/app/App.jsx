@@ -9,17 +9,29 @@ import SongsData from '../data/Songs';
 const App = () => {
 
 	const [songList, setSongList] = useState(SongsData);
-	const [currentSong, setCurrentSong] = useState(songList[0]);
-	const [isPlaying, setIsPlaying] = useState(false);
+	const [currentSongIndex, setCurrentSongIndex] = useState(0);
+
+	const changeSongHandler = (newSongIndex, incrementAmount) => {
+		if (newSongIndex != null) return setCurrentSongIndex(newSongIndex);
+		let adjustedSongIndex = currentSongIndex + incrementAmount;
+		if (adjustedSongIndex >= songList.length) adjustedSongIndex = 0;
+		if (adjustedSongIndex < 0) adjustedSongIndex = songList.length - 1;
+		setCurrentSongIndex(adjustedSongIndex);
+	}
 
 	return (
 		<div className="App">
-			<Library songList={songList}/>
-			<SongInformation currentSong={currentSong}/>
+			<Library
+				songList={songList}
+				currentSong={currentSongIndex}
+				changeSong={changeSongHandler}
+			/>
+			<SongInformation
+				currentSong={songList[currentSongIndex]}
+			/>
 			<MediaPlayer
-				currentSong={currentSong}
-				isPlaying={isPlaying}
-				setIsPlaying={setIsPlaying}
+				currentSong={songList[currentSongIndex]}
+				changeSong={changeSongHandler}
 			/>
 		</div>
 	);

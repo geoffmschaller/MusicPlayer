@@ -1,22 +1,29 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import styles from './MediaPlayer.module.sass';
 
 const MediaPlayer = props => {
 
+	const [isPlaying, setIsPlaying] = useState(false);
 	const [songInformation, setSongInformation] = useState({
 		current: 0,
-		duration: 0
+		duration: 1800
 	});
+
+	useEffect(() => {
+		audioRef.current.play();
+		setIsPlaying(true);
+	}, [props.currentSong]);
+
 	const audioRef = useRef(null);
 
 	const playSongHandler = () => {
-		if (props.isPlaying) {
-			props.setIsPlaying(false);
+		if (isPlaying) {
+			setIsPlaying(false);
 			audioRef.current.pause();
 			return
 		}
 		audioRef.current.play();
-		props.setIsPlaying(true);
+		setIsPlaying(true);
 	}
 
 	const timeUpdateHandler = (e) => {
@@ -25,6 +32,9 @@ const MediaPlayer = props => {
 			current: e.target.currentTime,
 			duration: e.target.duration
 		});
+		if (songInformation.current >= songInformation.duration && !isNaN(e.target.duration)) {
+			props.changeSong(null, 1);
+		}
 	}
 
 	const dragHandler = (e) => {
@@ -35,7 +45,9 @@ const MediaPlayer = props => {
 		});
 	}
 
-	const formatTime = (time) => Math.floor(time / 60) + ':' + ("0" + Math.floor(time % 60)).slice(-2);
+	const formatTime = (time) => isNaN(time)
+		? "--:--"
+		: Math.floor(time / 60) + ':' + ("0" + Math.floor(time % 60)).slice(-2);
 
 	return (
 		<div className={styles.mediaPlayer}>
@@ -44,20 +56,24 @@ const MediaPlayer = props => {
 				<input
 					type='range'
 					min='0'
-					max={songInformation.duration}
+					max={
+						!isNaN(songInformation.duration)
+							? songInformation.duration
+							: '18000'
+					}
 					value={songInformation.current}
 					onChange={dragHandler}
 				/>
 				<p>{formatTime(songInformation.duration)}</p>
 			</div>
 			<div className={styles.playControl}>
-				<i className="fas fa-chevron-double-left" />
+				<i className="fas fa-chevron-double-left" onClick={() => props.changeSong(null, -1)}/>
 				{
-					props.isPlaying
+					isPlaying
 						? <i className="far fa-pause" onClick={playSongHandler} />
 						: <i className="far fa-play" onClick={playSongHandler}/>
 				}
-				<i className="fas fa-chevron-double-right"/>
+				<i className="fas fa-chevron-double-right" onClick={() => props.changeSong(null, 1)}/>
 			</div>
 			<audio
 				onTimeUpdate={timeUpdateHandler}

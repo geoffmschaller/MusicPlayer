@@ -8,8 +8,11 @@ const Library = props => {
 			<div className={styles.title}>LIBRARY</div>
 			<div className={styles.songList}>
 				{
-					props.songList.map((song) => {
-						return <LibraryItem song={song} key={song.id}/>
+					props.songList.map((song, index) => {
+						const isCurrentSong = index == props.currentSong
+							? true
+							: false
+						return <LibraryItem current={isCurrentSong} song={song} key={song.id} click={() => props.changeSong(index, null)}/>
 					})
 				}
 			</div>

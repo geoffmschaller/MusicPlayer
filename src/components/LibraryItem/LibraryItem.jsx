@@ -2,8 +2,9 @@ import React from 'react';
 import styles from './LibraryItem.module.sass';
 
 const LibraryItem = props => {
+
 	return (
-		<div className={styles.libraryItem}>
+		<div className={[styles.libraryItem, props.current ? styles.active : styles.inactive].join(' ')} onClick={props.click}>
 			<img
 				src={props.song.cover}
 				alt=""
@@ -15,6 +16,11 @@ const LibraryItem = props => {
 			<div className={styles.description}>
 				<div className={styles.name}>{props.song.name}</div>
 				<div className={styles.artist}>{props.song.artist}</div>
+				{
+					props.current
+						? <div className={styles.playing}>Playing...</div>
+						: null
+				}
 			</div>
 		</div>
 	)
