@@ -4,8 +4,7 @@ import LibraryItem from '../LibraryItem/LibraryItem';
 
 const Library = props => {
 	return (
-		<div className={styles.library}>
-			<div className={styles.title}>LIBRARY</div>
+		<div className={[styles.library, props.menuMode ? '' : styles.closed].join(" ")}>
 			<div className={styles.songList}>
 				{
 					props.songList.map((song, index) => {

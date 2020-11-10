@@ -8,8 +8,8 @@ const SongInformation = props => {
 				src={props.currentSong.cover}
 				alt=""
 				style={{
-					'WebkitBoxShadow': `5px 5px 15px 5px ${props.currentSong.color[0]}`,
-					'boxShadow': `5px 5px 15px 5px ${props.currentSong.color[0]}`
+					'WebkitBoxShadow': `5px 5px 20px 1px ${props.currentSong.color[0]}`,
+					'boxShadow': `5px 5px 20px 1px ${props.currentSong.color[0]}`
 				}}
 			/>
 			<div className={styles.name}>{props.currentSong.name}</div>
