@@ -15,13 +15,25 @@
 			width: 100%
 			margin-top: -1.3rem
 
-			.customBar
+			.customBarHolder
 				flex: 3
 				height: 10px
 				transition: all .2s ease-in-out
 				box-shadow: 2px 2px 3px  #154360
 				margin-top: -2.2rem
 				border-radius: 6px
+				background-color: rgba( 229, 232, 232, 0.2)
+				overflow: hidden
+				position: relative
+				pointer-events: none
+
+				.progressBar
+					position: absolute
+					top: 0
+					left: 0
+					bottom: 0
+					border-radius: 10px
+					pointer-events: none
 
 			input
 				flex: 3
@@ -71,10 +83,9 @@ input[type=range]::-moz-range-track
 
 // BLOCK
 input[type=range]::-moz-range-thumb
-  box-shadow: 1px 1px 1px  #154360, 0px 0px 1px  #154360
-  border: 1px solid  #154360
+  border: none
   height: 20px
   width: 10px
   border-radius: 3px
-  background: #f8c471
+  background: transparent
   cursor: pointer

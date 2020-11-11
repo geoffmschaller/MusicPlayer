@@ -65,15 +65,17 @@ const MediaPlayer = props => {
 						value={songInformation.current}
 						onChange={dragHandler}
 					/>
-					<div
-						className={styles.customBar}
-						style={{
-							'background': props.currentSong.color[0],
-							'background': `linear-gradient(90deg, ${props.currentSong.color[0]} ${(songInformation.current/songInformation.duration) * 100}%, ${props.currentSong.color[1]} 100%)`
-						}}
-					/>
+					<div className={styles.customBarHolder}>
+						<div
+							className={styles.progressBar}
+							style={{
+								'background': props.currentSong.color[0],
+								'background': `linear-gradient(90deg, ${props.currentSong.color[0]} 0%, ${props.currentSong.color[1]} 100%)`,
+								'width': `${(songInformation.current/songInformation.duration) * 100}%`
+							}}
+						/>
+					</div>
 				</div>
-				
 				<p>{formatTime(songInformation.duration)}</p>
 			</div>
 			<div className={styles.playControl}>
