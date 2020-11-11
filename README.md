@@ -5,9 +5,11 @@ Just an demo React app. Plays some music off Chillhop.
 ---
 
 #### Screen Shots
-![Home Screen](./home_screen.jpg)
+![Song One](./song_one.png)
 
-![Menu Open](./menu_open.jpg)
+![Home Screen](./song_two.png)
+
+![Menu Open](./menu_open.png)
 
 ---
 
