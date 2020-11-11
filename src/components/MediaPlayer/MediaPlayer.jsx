@@ -53,17 +53,27 @@ const MediaPlayer = props => {
 		<div className={styles.mediaPlayer}>
 			<div className={styles.timeControl}>
 				<p>{formatTime(songInformation.current)}</p>
-				<input
-					type='range'
-					min='0'
-					max={
-						!isNaN(songInformation.duration)
-							? songInformation.duration
-							: '18000'
-					}
-					value={songInformation.current}
-					onChange={dragHandler}
-				/>
+				<div className={styles.customInput}>
+					<input
+						type='range'
+						min='0'
+						max={
+							!isNaN(songInformation.duration)
+								? songInformation.duration
+								: '18000'
+						}
+						value={songInformation.current}
+						onChange={dragHandler}
+					/>
+					<div
+						className={styles.customBar}
+						style={{
+							'background': props.currentSong.color[0],
+							'background': `linear-gradient(90deg, ${props.currentSong.color[0]} ${(songInformation.current/songInformation.duration) * 100}%, ${props.currentSong.color[1]} 100%)`
+						}}
+					/>
+				</div>
+				
 				<p>{formatTime(songInformation.duration)}</p>
 			</div>
 			<div className={styles.playControl}>
